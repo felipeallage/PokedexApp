@@ -43,6 +43,21 @@ extension PokeListViewController: UITableViewDataSource {
         return 80
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ListToDetail" {
+            if let viewController = segue.destination as? PokemonDetailViewController, let indexPath = self.pokeListTableView.indexPathForSelectedRow {
+                let pokemon = viewModel.getPokemonWithIndex(index: indexPath)
+                viewController.viewModel.getPokemonWithURL(url: pokemon.url )
+            }
+                
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "ListToDetail", sender: self)
+    }
+    
+    
     
 }
 

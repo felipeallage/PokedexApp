@@ -27,7 +27,7 @@ class PokeListTableViewCellModel {
     }
     
     func getImageURL() {
-        api.getPokemonSelected(url: pokemonEntry.url) { result in
+        api.getPokemonSprite(url: pokemonEntry.url) { result in
             switch result {
             case .success(let sprites):
                 self.delegate?.getImageURL(url: sprites.front_shiny)

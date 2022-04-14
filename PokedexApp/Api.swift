@@ -26,7 +26,7 @@ struct PokeAPI {
         }.resume()
     }
     
-    func getPokemonSelected(url: String, completion: @escaping (Result<PokemonSprites, ErrorApi>) -> ()) {
+    func getPokemonSprite(url: String, completion: @escaping (Result<PokemonSprites, ErrorApi>) -> ()) {
         guard let url = URL(string: url) else {
             completion(.failure(.linkError))
             return
@@ -39,6 +39,23 @@ struct PokeAPI {
             let pokemonSprite = try! JSONDecoder().decode(PokemonSelected.self, from: data)
             DispatchQueue.main.async {
                 completion(.success(pokemonSprite.sprites))
+            }
+        }.resume()
+    }
+    
+    func getPokemonSelected(url: String, completion: @escaping (Result<PokemonSelected, ErrorApi>) -> ()) {
+        guard let url = URL(string: url) else {
+            completion(.failure(.linkError))
+            return
+        }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
+                completion(.failure(.genericError))
+                return
+            }
+            let pokemonSelected = try! JSONDecoder().decode(PokemonSelected.self, from: data)
+            DispatchQueue.main.async {
+                completion(.success(pokemonSelected))
             }
         }.resume()
     }

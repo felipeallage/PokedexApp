@@ -221,8 +221,8 @@
 			isa = PBXGroup;
 			children = (
 				848F419627FFBFF400062D40 /* Model */,
-				848F419827FFC00300062D40 /* View */,
 				848F419727FFBFF900062D40 /* ViewModel */,
+				848F419827FFC00300062D40 /* View */,
 			);
 			path = PokemonDetail;
 			sourceTree = "<group>";

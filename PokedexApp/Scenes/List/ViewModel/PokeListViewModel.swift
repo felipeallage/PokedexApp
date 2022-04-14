@@ -43,7 +43,7 @@ class PokeListViewModel {
     }
     
     func getPokemonImageURL(pokemonURL: String) {
-        api.getPokemonSelected(url: pokemonURL) { result in
+        api.getPokemonSprite(url: pokemonURL) { result in
             switch result {
             case .success(let pokemonSprites):
                 self.pokemonSprite = pokemonSprites.front_shiny
@@ -67,5 +67,9 @@ class PokeListViewModel {
     func numberOfCells() -> Int {
         return pokemonList.count
     }
+    
+    func getPokemonWithIndex(index: IndexPath) -> PokemonEntry {
+        return pokemonList[index.row].pokemonEntry
+    }
+    
 }
-
