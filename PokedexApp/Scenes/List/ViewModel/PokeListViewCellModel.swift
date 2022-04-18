@@ -21,7 +21,7 @@ protocol PokeListCellProtocol {
 
 class PokeListService: PokeListCellProtocol {
     func getSprites(completion: @escaping SpriteResponse) {
-        API.shared.sendRequest(url: <#T##String#>, completion: <#T##(Result<Decodable & Encodable, ErrorApi>) -> Void#>)
+        API.shared.sendRequest(url: "", completion: SpriteResponse)
     }
     
     
