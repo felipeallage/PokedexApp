@@ -13,35 +13,23 @@ protocol PokelistTableViewCellModelDelegate {
     
 }
 
-protocol PokeListCellProtocol {
-    typealias SpriteResponse = (Result<PokemonSprites, ErrorApi>) -> Void
-    func getSprites(url: String, completion: @escaping SpriteResponse)
-    
-}
-
-class PokeListService: PokeListCellProtocol {
-    func getSprites(completion: @escaping SpriteResponse) {
-        API.shared.sendRequest(url: "", completion: SpriteResponse)
-    }
-    
-    
-}
 
 class PokeListTableViewCellModel {
     
     let pokemonEntry: PokemonEntry
     
-    let pokemonApi = API()
+    let pokemonApi : PokeServiceProtocol
     
     var delegate: PokelistTableViewCellModelDelegate?
     
-    init(pokemonEntry: PokemonEntry) {
+    init(pokemonEntry: PokemonEntry, pokemonApi: PokeServiceProtocol = PokeService()) {
         self.pokemonEntry = pokemonEntry
+        self.pokemonApi = pokemonApi
         
     }
     
     func getImageURL() {
-        api.getPokemonSprite(url: pokemonEntry.url) { result in
+        pokemonApi.getSprite(url: pokemonEntry.url) { result in
             switch result {
             case .success(let sprites):
                 self.delegate?.getImageURL(url: sprites.front_shiny)

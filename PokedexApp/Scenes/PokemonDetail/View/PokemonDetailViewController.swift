@@ -18,11 +18,12 @@ class PokemonDetailViewController: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     
-    var viewModel = PokemonDetailViewModel()
+    var viewModel : PokemonDetailViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
+        
         
     }
     

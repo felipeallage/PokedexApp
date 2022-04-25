@@ -48,13 +48,17 @@ class PokeListTableViewCell: UITableViewCell {
         self.contentView.addSubview(hStack)
         self.contentView.backgroundColor = .red
         self.contentView.layer.cornerRadius = 10
+        self.contentView.layer.masksToBounds = false
+        self.contentView.layer.borderColor = UIColor.black.cgColor
+        self.contentView.layer.borderWidth = 1
         pokemonImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
         pokemonImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10).isActive = true
         pokemonImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
         pokemonImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         hStack.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-        hStack.leadingAnchor.constraint(equalTo: self.pokemonImageView.trailingAnchor, constant: 10).isActive = true
+        hStack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
         self.contentView.trailingAnchor.constraint(equalTo: self.hStack.trailingAnchor, constant: 10).isActive = true
+
     }
     
     required init?(coder: NSCoder) {

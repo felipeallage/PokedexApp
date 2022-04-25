@@ -16,17 +16,6 @@ protocol PokeListViewModelDelegate {
     
 }
 
-class PokeService: PokemonListProtocol {
-    func getPokemon(completion: @escaping PokemonResponse) {
-        API.shared.sendRequest(url: "https://pokeapi.co/api/v2/pokemon?limit=151", completion: completion)
-    }
-}
-
-protocol PokemonListProtocol {
-    typealias PokemonResponse = (Result<[PokemonEntry], ErrorApi>) -> Void
-    func getPokemon(completion: @escaping PokemonResponse)
-}
-
 class PokeListViewModel {
     
     var pokemonList: [PokeListTableViewCellModel] = []
@@ -35,17 +24,17 @@ class PokeListViewModel {
     
     var pokemonSprite: String?
     
-    let pokemonApi: PokemonListProtocol
+    let pokemonApi: PokeServiceProtocol
     
-    init(pokemonApi: PokemonListProtocol) {
+    init(pokemonApi: PokeServiceProtocol) {
         self.pokemonApi = pokemonApi
     }
     
     func getPokemonList() {
         pokemonApi.getPokemon { result in
             switch result {
-            case .success(let pokemonarray):
-                for pokemon in pokemonarray {
+            case .success(let pokemon):
+                for pokemon in pokemon.results {
                     self.pokemonList.append(PokeListTableViewCellModel(pokemonEntry: pokemon))
                     self.delegate?.didSucess()
                 }

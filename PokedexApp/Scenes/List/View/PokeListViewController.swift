@@ -11,7 +11,7 @@ class PokeListViewController: UIViewController {
     
     @IBOutlet weak var pokeListTableView: UITableView!
     
-    var viewModel = PokeListViewModel()
+    var viewModel = PokeListViewModel(pokemonApi: PokeService())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class PokeListViewController: UIViewController {
         pokeListTableView.dataSource = self
         pokeListTableView.delegate = self
         viewModel.delegate = self
-        viewModel.getListfromAPI()
+        viewModel.getPokemonList()
     }
 }
 
@@ -47,7 +47,7 @@ extension PokeListViewController: UITableViewDataSource {
         if segue.identifier == "ListToDetail" {
             if let viewController = segue.destination as? PokemonDetailViewController, let indexPath = self.pokeListTableView.indexPathForSelectedRow {
                 let pokemon = viewModel.getPokemonWithIndex(index: indexPath)
-                viewController.viewModel.getPokemonWithURL(url: pokemon.url )
+                viewController.viewModel = PokemonDetailViewModel(pokemon: pokemon)
             }
                 
         }
