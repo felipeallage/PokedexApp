@@ -41,17 +41,22 @@ class PokemonDetailViewModel {
     }
     
     func getPokemonSprite() -> String {
-        return pokemon.sprites?.front_default ?? ""
+        if let sprites = pokemon.sprites, let front = sprites.front_default {
+            return front
+        }
+        return ""
     }
     
     func getPokemonWithURL() {
         pokemonApi.getPokemonSelected(url: pokemon.url) { result in
-            switch result {
-            case .success(let pokemon):
-                self.pokemon = pokemon
-                self.delegate?.didSuccess()
-            case .failure(let error):
-                self.delegate?.didFailure(error: error)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let pokemon):
+                    self.pokemon = pokemon
+                    self.delegate?.didSuccess()
+                case .failure(let error):
+                    self.delegate?.didFailure(error: error)
+                }
             }
         }
     }

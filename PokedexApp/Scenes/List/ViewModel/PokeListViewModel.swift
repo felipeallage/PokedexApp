@@ -32,14 +32,16 @@ class PokeListViewModel {
     
     func getPokemonList() {
         pokemonApi.getPokemon { result in
-            switch result {
-            case .success(let pokemon):
-                for pokemon in pokemon.results {
-                    self.pokemonList.append(PokeListTableViewCellModel(pokemonEntry: pokemon))
-                    self.delegate?.didSucess()
+            DispatchQueue.main.async{
+                switch result {
+                case .success(let pokemon):
+                    for pokemon in pokemon.results {
+                        self.pokemonList.append(PokeListTableViewCellModel(pokemonEntry: pokemon))
+                        self.delegate?.didSucess()
+                    }
+                case .failure(let error):
+                    self.delegate?.didFailure(error: error)
                 }
-            case .failure(let error):
-                self.delegate?.didFailure(error: error)
             }
         }
     }

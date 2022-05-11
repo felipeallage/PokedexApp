@@ -22,8 +22,8 @@ struct PokemonEntry: Codable {
 
 
 struct PokemonSprites: Codable {
-    var front_default: String
-    var front_shiny: String
+    var front_default: String?
+    var front_shiny: String?
 }
 
 
