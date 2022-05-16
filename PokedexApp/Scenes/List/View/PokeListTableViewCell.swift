@@ -38,15 +38,16 @@ class PokeListTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.contentView.backgroundColor = .red
+        self.contentView.layer.cornerRadius = 10
+        self.contentView.layer.masksToBounds = false
+        self.contentView.layer.borderColor = UIColor.black.cgColor
+        self.contentView.layer.borderWidth = 1
         self.addSubview(pokemonImageView)
         self.addSubview(pokemonNameLabel)
-//        self.contentView.backgroundColor = .red
-//        self.contentView.layer.cornerRadius = 10
-//        self.contentView.layer.masksToBounds = false
-//        self.contentView.layer.borderColor = UIColor.black.cgColor
-//        self.contentView.layer.borderWidth = 1
         pokemonImageView.centerY(inView: self)
         pokemonImageView.setDimensions(height: 70, width: 70)
+        pokemonImageView.anchor(left: self.leftAnchor, paddingLeft: 10)
         pokemonNameLabel.centerY(inView: self)
         pokemonNameLabel.anchor(left: self.pokemonImageView.rightAnchor, right: self.rightAnchor, paddingLeft: 10, paddingRight: 10)
         

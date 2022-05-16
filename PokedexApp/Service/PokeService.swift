@@ -11,7 +11,7 @@ import Foundation
 protocol PokeServiceProtocol {
     
     typealias PokemonListResponse = (Result<Pokemon, ErrorApi>) -> Void
-    typealias PokemonSpriteResponse = (Result<PokemonSprites, ErrorApi>) -> Void
+    typealias PokemonSpriteResponse = (Result<PokemonEntry, ErrorApi>) -> Void
     typealias PokemonSelectedResponse = (Result<PokemonEntry, ErrorApi>) -> Void
     
     func getPokemon(completion: @escaping PokemonListResponse)
@@ -27,8 +27,8 @@ class PokeService: PokeServiceProtocol {
         API.shared.sendRequest(url: url, completion: completion)
     }
     
-    func getSprite(url: String, completion: @escaping PokemonSpriteResponse) {
-        API.shared.sendRequest(url: url, completion: completion)
+    func getSprite(url spriteurl: String, completion: @escaping PokemonSpriteResponse) {
+        API.shared.sendRequest(url: spriteurl, completion: completion)
     }
     
     func getPokemon(completion: @escaping PokemonListResponse) {

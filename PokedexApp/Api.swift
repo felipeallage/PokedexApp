@@ -22,7 +22,7 @@ struct API {
                 completion(.failure(.genericError))
                 return
             }
-            let responseModel = try!JSONDecoder().decode(T.self, from: data)
+            let responseModel = try! JSONDecoder().decode(T.self, from: data)
             completion(.success(responseModel))
         }.resume()
     }
