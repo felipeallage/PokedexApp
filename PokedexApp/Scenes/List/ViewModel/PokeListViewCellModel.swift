@@ -29,11 +29,14 @@ class PokeListTableViewCellModel {
     }
     
     func getImageURL() {
-        pokemonApi.getSprite(url: pokemonEntry.url) { result in
+        guard let url = pokemonEntry.url else { 
+            return
+            }
+        pokemonApi.getSprite(url: url) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let pokemon):
-                    self.delegate?.getImageURL(url: pokemon.sprites?.front_default ?? "")
+                    self.delegate?.getImageURL(url: pokemon.sprites?.front_default ?? "erro")
                 case .failure(_):
                     break
                 }

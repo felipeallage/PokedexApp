@@ -23,7 +23,7 @@ class PokemonDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        
+        viewModel.getPokemonWithURL()
         
     }
     

@@ -14,7 +14,7 @@ struct Pokemon: Codable {
 
 struct PokemonEntry: Codable {
     var name: String
-    var url: String
+    var url: String?
     var sprites: PokemonSprites?
     var height: Int?
     var weight: Int?

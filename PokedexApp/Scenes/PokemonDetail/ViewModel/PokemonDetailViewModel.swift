@@ -48,7 +48,10 @@ class PokemonDetailViewModel {
     }
     
     func getPokemonWithURL() {
-        pokemonApi.getPokemonSelected(url: pokemon.url) { result in
+        guard let url = pokemon.url else {
+            return
+            }
+        pokemonApi.getPokemonSelected(url: url) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let pokemon):

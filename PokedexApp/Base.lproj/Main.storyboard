@@ -18,11 +18,16 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="FqG-hg-HbZ">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <color key="separatorColor" systemColor="labelColor"/>
+                                <color key="sectionIndexColor" systemColor="systemRedColor"/>
+                                <color key="sectionIndexBackgroundColor" systemColor="systemRedColor"/>
+                                <color key="sectionIndexTrackingBackgroundColor" systemColor="systemRedColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="FqG-hg-HbZ" secondAttribute="bottom" id="17o-bX-Dj4"/>
                             <constraint firstItem="FqG-hg-HbZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MMe-5k-Qdq"/>
@@ -118,7 +123,8 @@
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZx-Wl-AbS">
                                                 <rect key="frame" x="0.0" y="150.5" width="414" height="433.5"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                <color key="tintColor" systemColor="systemRedColor"/>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -138,7 +144,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mwU-gA-MpD"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
                         <constraints>
                             <constraint firstItem="mwU-gA-MpD" firstAttribute="trailing" secondItem="hUK-Ri-kaj" secondAttribute="trailing" id="0tp-e8-VCd"/>
                             <constraint firstItem="mwU-gA-MpD" firstAttribute="bottom" secondItem="hUK-Ri-kaj" secondAttribute="bottom" id="2sc-Jp-aDR"/>
@@ -177,8 +183,11 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
