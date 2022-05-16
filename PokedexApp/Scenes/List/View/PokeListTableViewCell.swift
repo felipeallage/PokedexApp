@@ -15,6 +15,7 @@ class PokeListTableViewCell: UITableViewCell {
     
     static let identifier = "ID"
     
+
     lazy var pokemonImageView: UIImageView = {
         let img = UIImageView()
         img.contentMode = .scaleToFill
@@ -33,28 +34,23 @@ class PokeListTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var hStack: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [pokemonImageView, pokemonNameLabel])
-        stack.axis = .horizontal
-        stack.alignment = .center
-        stack.distribution = .fill
-        stack.spacing = 10
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
+
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.contentView.addSubview(hStack)
         self.contentView.backgroundColor = .red
         self.contentView.layer.cornerRadius = 10
-        pokemonImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-        pokemonImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10).isActive = true
-        pokemonImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        pokemonImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        hStack.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-        hStack.leadingAnchor.constraint(equalTo: self.pokemonImageView.trailingAnchor, constant: 10).isActive = true
-        self.contentView.trailingAnchor.constraint(equalTo: self.hStack.trailingAnchor, constant: 10).isActive = true
+        self.contentView.layer.masksToBounds = false
+        self.contentView.layer.borderColor = UIColor.black.cgColor
+        self.contentView.layer.borderWidth = 1
+        self.addSubview(pokemonImageView)
+        self.addSubview(pokemonNameLabel)
+        pokemonImageView.centerY(inView: self)
+        pokemonImageView.setDimensions(height: 70, width: 70)
+        pokemonImageView.anchor(left: self.leftAnchor, paddingLeft: 10)
+        pokemonNameLabel.centerY(inView: self)
+        pokemonNameLabel.anchor(left: self.pokemonImageView.rightAnchor, right: self.rightAnchor, paddingLeft: 10, paddingRight: 10)
+        
     }
     
     required init?(coder: NSCoder) {

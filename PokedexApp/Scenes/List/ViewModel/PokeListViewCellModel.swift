@@ -13,27 +13,33 @@ protocol PokelistTableViewCellModelDelegate {
     
 }
 
+
 class PokeListTableViewCellModel {
     
     let pokemonEntry: PokemonEntry
     
-    let api = PokeAPI()
+    let pokemonApi : PokeServiceProtocol
     
     var delegate: PokelistTableViewCellModelDelegate?
     
-    init(pokemonEntry: PokemonEntry) {
+    init(pokemonEntry: PokemonEntry, pokemonApi: PokeServiceProtocol = PokeService()) {
         self.pokemonEntry = pokemonEntry
+        self.pokemonApi = pokemonApi
         
     }
     
     func getImageURL() {
-        api.getPokemonSprite(url: pokemonEntry.url) { result in
-            switch result {
-            case .success(let sprites):
-                self.delegate?.getImageURL(url: sprites.front_shiny)
-            case .failure(_):
-                break
-                
+        guard let url = pokemonEntry.url else { 
+            return
+            }
+        pokemonApi.getSprite(url: url) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let pokemon):
+                    self.delegate?.getImageURL(url: pokemon.sprites?.front_default ?? "erro")
+                case .failure(_):
+                    break
+                }
             }
         }
     }

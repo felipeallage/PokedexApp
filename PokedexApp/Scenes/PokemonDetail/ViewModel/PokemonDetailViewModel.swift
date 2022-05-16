@@ -17,48 +17,49 @@ protocol PokemonDetailViewModelDelegate {
 
 class PokemonDetailViewModel {
     
-    private var pokemon : PokemonSelected?
+    private var pokemon : PokemonEntry
     
-    var api = PokeAPI()
+    let pokemonApi : PokeServiceProtocol
     
     var delegate : PokemonDetailViewModelDelegate?
     
+    init(pokemon: PokemonEntry, pokemonApi: PokeServiceProtocol = PokeService()) {
+        self.pokemonApi = pokemonApi
+        self.pokemon = pokemon
+    }
+    
     func getPokemonName() -> String {
-        if let pokemon = pokemon {
             return pokemon.name
-        }
-        return ""
     }
     
     func getPokemonWeight() -> Int {
-        if let pokemon = pokemon {
-            return pokemon.weight
-        }
-        return 0
+        return pokemon.weight ?? 0
     }
     
     func getPokemonHeight() -> Int {
-        if let pokemon = pokemon {
-            return pokemon.height
-        }
-        return 0
+            return pokemon.height ?? 0
     }
     
     func getPokemonSprite() -> String {
-        if let pokemon = pokemon {
-            return pokemon.sprites.front_default
+        if let sprites = pokemon.sprites, let front = sprites.front_default {
+            return front
         }
         return ""
     }
     
-    func getPokemonWithURL(url: String) {
-        api.getPokemonSelected(url: url) { result in
-            switch result {
-            case .success(let pokemon):
-                self.pokemon = pokemon
-                self.delegate?.didSuccess()
-            case .failure(let error):
-                self.delegate?.didFailure(error: error)
+    func getPokemonWithURL() {
+        guard let url = pokemon.url else {
+            return
+            }
+        pokemonApi.getPokemonSelected(url: url) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let pokemon):
+                    self.pokemon = pokemon
+                    self.delegate?.didSuccess()
+                case .failure(let error):
+                    self.delegate?.didFailure(error: error)
+                }
             }
         }
     }
